@@ -12,7 +12,7 @@
 3. Install Alpaca API ```pipenv install alpaca_trade_api```
 4. Create an account on alpaca.markets, navigate to your account homepage and collect your API key on the right side of the page. 
 ![image](https://raw.githubusercontent.com/lk2344/freestyle-project/main/img.png)
-5. To connect to your Alpaca account, you will need to correctly enter your API Keys. Please note, that the base url is for paper trading only, omit it you're goint to going to do real trading.
+5. To connect to your Alpaca account, you will need to correctly enter your API Keys. Please note, that the base url is for paper trading only, omit it you're going to do real trading.
 ```python
 SEC_KEY = 'enter your secret key here' 
 PUB_KEY = 'enter your public key here'
