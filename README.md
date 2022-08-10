@@ -14,7 +14,7 @@
 
 ![image](https://raw.githubusercontent.com/lk2344/freestyle-project/main/img.png)
 
-5. To connect to your Alpaca account, you will need to correctly enter your API Keys. Please note, that the base url is for paper trading only, omit it you're going to do real trading.
+5. To connect to your Alpaca account, you will need to correctly enter your API Keys. Please note, that the base url is for paper trading only, omit if you're going to do real trading.
 
 ```python
 SEC_KEY = 'enter your secret key here' 
