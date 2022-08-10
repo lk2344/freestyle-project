@@ -11,4 +11,4 @@
 2. Create a pip environment ```pipenv shell```
 3. Install Alpaca API ```pipenv install alpaca_trade_api```
 4. Create an account on alpaca.markets, navigate to your account homepage and collect your API key on the right side of the page. 
-<img src="png.png" width="800" height="400">
+![image](https://raw.githubusercontent.com/lk2344/freestyle-project/main/img.png)
