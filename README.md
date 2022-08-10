@@ -12,5 +12,4 @@
 3. Install Alpaca API ```pipenv install alpaca_trade_api```
 4. Create an account on alpaca.markets, navigate to your account homepage and collect your API key on the right side of the page. 
 ````python
-from IPython.display import Image
-Image(filename='png.png')
+<img src="png.png" width="800" height="400">
