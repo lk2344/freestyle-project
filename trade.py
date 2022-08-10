@@ -15,10 +15,10 @@ bp = (account.buying_power) # gets account buying power
 clock = api.get_clock() #make sure market is open to make trades
 print('The market is {}'.format('open.' if clock.is_open else 'closed.'))
 
-barset = api.get_barset('SPY', 'day')
-spy_bars = barset['SPY']
+barset = api.get_bars("SPY", '1Min', limit=1, adjustment='raw')
 
-print(spy_bars)
+
+print(barset)
 
 #print(x)
 
