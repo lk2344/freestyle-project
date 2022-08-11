@@ -1,47 +1,47 @@
+
+import alpaca_trade_api as tradeapi
+import numpy as np
+import time
 import logging
-
 from alpaca_trade_api.stream import Stream
+from alpaca_trade_api.common import URL
 
-log = logging.getLogger(__name__)
+SEC_KEY = 'RSUbIPiL0wwB9RPAol4qx3iy3Ds6h6k9gSwrrPO3'
+PUB_KEY = 'PKGCDFGTX33SFDNMT757'
+BASE_URL = 'https://paper-api.alpaca.markets'
 
 
-async def print_trade(t):
-    print('trade', t)
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+
+ALPACA_API_KEY = PUB_KEY
+ALPACA_SECRET_KEY = SEC_KEY
+
+
+def run_connection(conn):
+    try:
+        conn.run()
+    except KeyboardInterrupt:
+        print("Interrupted execution by user")
+        loop.run_until_complete(conn.stop_ws())
+        exit(0)
+    except Exception as e:
+        print(f'Exception from websocket connection: {e}')
+    finally:
+        print("Trying to re-establish connection")
+        time.sleep(3)
+        run_connection(conn)
 
 
 async def print_quote(q):
     print('quote', q)
 
 
-async def print_trade_update(tu):
-    print('trade update', tu)
+if __name__ == '__main__':
+    conn = Stream(ALPACA_API_KEY,
+                  ALPACA_SECRET_KEY,
+                  base_url=URL('https://paper-api.alpaca.markets'),
+                  data_feed='iex')
 
-def main():
-    logging.basicConfig(level=logging.INFO)
-    feed = 'iex'  # <- replace to SIP if you have PRO subscription
-    stream = Stream(data_feed=feed, raw_data=True)
-    stream.subscribe_trade_updates(print_trade_update)
-    stream.subscribe_trades(print_trade, 'SPY')
-    stream.subscribe_quotes(print_quote, 'SPY')
+    conn.subscribe_quotes(print_quote, 'SPY')
 
-    @stream.on_bar('SPY')
-    async def _(bar):
-        print('bar', bar)
-
-    @stream.on_updated_bar('SPY')
-    async def _(bar):
-        print('updated bar', bar)
-
-    @stream.on_status("*")
-    async def _(status):
-        print('status', status)
-
-    @stream.on_luld('SPY')
-    async def _(luld):
-        print('LULD', luld)
-
-    stream.run()
-
-
-if __name__ == "__main__":
-    main()
+    run_connection(conn)
