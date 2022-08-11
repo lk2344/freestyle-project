@@ -4,6 +4,8 @@ import time
 import talib
 from matplotlib import pyplot as plt
 
+
+
 SEC_KEY = 'RSUbIPiL0wwB9RPAol4qx3iy3Ds6h6k9gSwrrPO3'
 PUB_KEY = 'PKGCDFGTX33SFDNMT757'
 BASE_URL = 'https://paper-api.alpaca.markets'
@@ -18,10 +20,11 @@ bp = (account.buying_power) # gets account buying power
 clock = api.get_clock() #make sure market is open to make trades
 print('The market is {}'.format('open.' if clock.is_open else 'closed.'))
 
-barset = api.get_bars("SPY", '1Min', limit=7200, adjustment='raw') #getting stock price data
+barset = api.get_bars("SPY", '1Min', limit=7200)._raw #getting stock price data
 #https://forum.alpaca.markets/t/http-error-on-get-barset/8811/8
 
-print(barset)
+for x in barset:
+	print(x['o'])
 
 
 
