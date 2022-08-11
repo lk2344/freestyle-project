@@ -13,8 +13,8 @@ import datetime
 now = datetime.datetime.now()
 
 
-SEC_KEY = 'tH5XzgJtBaaHyoIApD3va0rezNuu7SdTCltnSwqj'
-PUB_KEY = 'PKOO6LEMJEKR40536XHB'
+SEC_KEY = ''
+PUB_KEY = ''
 BASE_URL = 'https://paper-api.alpaca.markets'
 api = tradeapi.REST(key_id= PUB_KEY, secret_key=SEC_KEY, base_url=BASE_URL)
 #https://curatedpython.com/p/alpaca-trade-api-python-alpacahq-alpaca-trade-api-python/index.html
@@ -87,6 +87,7 @@ while True:
 
 
 	if rsi_now < 35:
+		print('buying...')
 		api.submit_order(
  			symbol='SPY',
   			qty=share_quantity,
@@ -96,6 +97,7 @@ while True:
 			)
 
 	if rsi_now > 65:
+		print('selling...')
 		api.submit_order(
  			symbol='SPY',
   			qty=position.qty,
