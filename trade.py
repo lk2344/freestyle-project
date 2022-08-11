@@ -44,8 +44,9 @@ end = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(minutes
 #this needs to be deleted if one has access to real time data.
 
 position = api.get_position('SPY')
-print(position.qty)
+#https://alpaca.markets/deprecated/docs/api-documentation/how-to/portfolio/
 
+i=1
 while True:
 
 	barset = api.get_bars(symbol='SPY',
@@ -99,6 +100,10 @@ while True:
   			time_in_force='gtc'
 			)
 
-	if rsi_now > 35 or rsi_now < 65:
-		print('waiting to enter/exit')
+	if i==1:
+		i=i+1
+		if rsi_now > 35 or rsi_now < 65:
+			print('waiting to enter/exit')
+	else:
+		continue
 
