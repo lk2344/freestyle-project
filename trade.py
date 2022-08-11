@@ -25,11 +25,6 @@ api = tradeapi.REST(key_id= PUB_KEY, secret_key=SEC_KEY, base_url=BASE_URL)
             #data_feed='iex')
 
 account = api.get_account() # gets account data
-buying_power = (account.buying_power) # gets account buying power
-
-x = float(buying_power)
-y = int(x)
-trade_limit = y * 0.25 #this is to size our trades based on buying power
 
 clock = api.get_clock() #make sure market is open to make trades
 print('The market is {}'.format('open.' if clock.is_open else 'closed.'))
@@ -46,8 +41,16 @@ end = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(minutes
 position = api.get_position('SPY')
 #https://alpaca.markets/deprecated/docs/api-documentation/how-to/portfolio/
 
+#https://stackoverflow.com/questions/62654504/how-to-print-only-once-inside-a-while-loop-in-python
+#need to continuously look for data ie the infinite loop.
+
 i=1
 while True:
+	buying_power = (account.buying_power) # gets account buying power
+
+	x = float(buying_power)
+	y = int(x)
+	trade_limit = y * 0.25 #this is to size our trades based on buying power
 
 	barset = api.get_bars(symbol='SPY',
 				timeframe=TimeFrame.Minute, 
